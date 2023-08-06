@@ -1,4 +1,5 @@
-from flask import Flask, request, Blueprint, jsonify
+# app.py
+from flask import Flask, request, Blueprint, jsonify, render_template
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 from datetime import datetime, timedelta
@@ -15,7 +16,7 @@ bp = Blueprint('license', __name__, url_prefix='/')
 logging.basicConfig(level=logging.DEBUG)
 
 # Read MongoDB URL from environment variables
-MONGODB_URL = os.getenv('MONGODB_URL')
+MONGODB_URL = os.getenv('MONGODB_URL', 'mongodb://localhost:27017/')
 
 client = MongoClient(MONGODB_URL)
 db = client["license_db"]
@@ -25,6 +26,10 @@ codes.create_index("_id", unique=True)
 
 def generate_license_code(size=10, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+@app.route('/')
+def landing_page():
+    return render_template('index.html')
 
 @bp.route('/')
 def home():
