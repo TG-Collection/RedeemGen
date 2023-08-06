@@ -1,99 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>License Code Generator</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif; 
-                margin: 0 auto; 
-                max-width: 800px; 
-                padding: 1em;
-                background-color: #F5F5F5;
-            }
-            h1 {
-                color: #333;
-            }
-            p {
-                font-size: 18px;
-                color: #666;
-            }
-            code {
-                display: block;
-                background-color: #EEE; 
-                padding: 10px; 
-                border-radius: 5px;
-                margin-bottom: 10px;
-            }
-            ul {
-                list-style-type: none;
-            }
-            li {
-                margin-bottom: 20px;
-            }
-            .generate-section {
-                margin-top: 50px;
-            }
-            .generate-section input {
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                margin-right: 10px;
-            }
-            .generate-section button {
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                background-color: #4CAF50;
-                color: white;
-                cursor: pointer;
-            }
-            .generate-section button:hover {
-                background-color: #45a049;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>License Code Generator</h1>
-        <p>This application generates unique license codes and allows you to validate them.</p>
-        <h2>Endpoints:</h2>
-        <ul>
-            <li>
-                <code>/generate_access_key</code>
-                <p>Generates a new access key.</p>
-            </li>
-            <li>
-                <code>/license?access_key=ACCESS_KEY&action=generate&days=DAYS</code>
-                <p>Generates a new license code. Replace <code>ACCESS_KEY</code> with your access key and <code>DAYS</code> with the number of days before the code expires.</p>
-            </li>
-            <li>
-                <code>/license?access_key=ACCESS_KEY&action=validate&code=CODE</code>
-                <p>Validates a license code. Replace <code>ACCESS_KEY</code> with your access key and <code>CODE</code> with the license code you want to validate.</p>
-            </li>
-        </ul>
+<head>
+    <title>License Code Generator</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 0 20px;
+        }
+        .title {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        #accessKeyInput {
+            font-size: 1.2em;
+            padding: 10px;
+            width: 300px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #generateButton {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #008CBA; 
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        #generateButton:hover {
+            background-color: #007B9A;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">License Code Generator</div>
+        <input id="accessKeyInput" type="text" placeholder="Enter your access key">
+        <button id="generateButton">Generate License Code</button>
+    </div>
 
-        <div class="generate-section">
-            <h2>Generate a new license:</h2>
-            <input type="text" id="accessKeyInput" placeholder="Enter your access key">
-            <button id="generateButton">Generate</button>
-        </div>
-        
-        <script>
-    document.getElementById('generateButton').onclick = function() {
-        var accessKey = document.getElementById('accessKeyInput').value;
-        var url = '/?access_key=' + accessKey + '&action=generate&days=30';
-        
-        fetch(url)
-            .then(response => {
-                var contentType = response.headers.get("content-type");
-                if (contentType && contentType.indexOf("application/json") !== -1) {
-                    return response.json().then(data => alert('License code: ' + data.license_code));
-                } else {
-                    throw 'Invalid access key or server error';
-                }
-            })
-            .catch(error => alert('Error: ' + error));
-    };
-        </script>
-    </body>
+    <script>
+        document.getElementById('generateButton').onclick = function() {
+            var accessKey = document.getElementById('accessKeyInput').value;
+            var url = '/?access_key=' + accessKey + '&action=generate&days=30';
+            
+            fetch(url)
+                .then(response => {
+                    var contentType = response.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return response.json().then(data => alert('License code: ' + data.license_code));
+                    } else {
+                        throw 'Invalid access key or server error';
+                    }
+                })
+                .catch(error => alert('Error: ' + error));
+        };
+    </script>
+</body>
 </html>
-
