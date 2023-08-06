@@ -30,6 +30,26 @@
             li {
                 margin-bottom: 20px;
             }
+            .generate-section {
+                margin-top: 50px;
+            }
+            .generate-section input {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
+            .generate-section button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: #4CAF50;
+                color: white;
+                cursor: pointer;
+            }
+            .generate-section button:hover {
+                background-color: #45a049;
+            }
         </style>
     </head>
     <body>
@@ -50,5 +70,11 @@
                 <p>Validates a license code. Replace <code>ACCESS_KEY</code> with your access key and <code>CODE</code> with the license code you want to validate.</p>
             </li>
         </ul>
+
+        <div class="generate-section">
+            <h2>Generate a new license:</h2>
+            <input type="text" id="accessKeyInput" placeholder="Enter your access key">
+            <button id="generateButton">Generate</button>
+        </div>
     </body>
 </html>
