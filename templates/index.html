@@ -1,12 +1,42 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to Our License Generator</title>
+    <title>License Code Generation API</title>
 </head>
 <body>
-    <h1>Welcome to Our License Generator</h1>
-    <p>Use the '/?generate_key&validate=<time_in_days>' endpoint to generate a new license code.</p>
-    <p>Use the '/?validate=<generated_code>' endpoint to validate an existing license code.</p>
+    <h1>Welcome to the License Code Generation API!</h1>
+    <p>This API provides endpoints to generate and validate unique license codes.</p>
+    <h2>API Endpoints</h2>
+
+    <h3>Generate Access Key</h3>
+    <p>
+        <strong>URL:</strong> https://lisencecodegen.onrender.com/generate_access_key<br>
+        <strong>Method:</strong> GET<br>
+        <strong>Success Response:</strong> Returns the generated access key. Code: 200, Content: { "access_key": "S3KLA7D9Z1" }
+    </p>
+
+    <h3>Generate License Code</h3>
+    <p>
+        <strong>URL:</strong> https://lisencecodegen.onrender.com/?access_key=ACCESS_KEY&action=generate&days=DAYS<br>
+        <strong>Method:</strong> GET<br>
+        <strong>URL Params:</strong><br>
+        - access_key=string: Your valid access key.<br>
+        - action=generate<br>
+        - days=integer: Number of days the license code should be valid for. If not provided, it will default to 30 days.<br>
+        <strong>Success Response:</strong> Returns the generated license code. Code: 200, Content: { "license_code": "1F2E9R3T5Y" }
+    </p>
+
+    <h3>Validate License Code</h3>
+    <p>
+        <strong>URL:</strong> https://lisencecodegen.onrender.com/?access_key=ACCESS_KEY&action=validate&code=CODE<br>
+        <strong>Method:</strong> GET<br>
+        <strong>URL Params:</strong><br>
+        - access_key=string: Your valid access key.<br>
+        - action=validate<br>
+        - code=string: License code you want to validate.<br>
+        <strong>Success Response:</strong> Returns a success message if the code is valid and hasn't been used. Code: 200, Content: { "message": "Code validated successfully" }
+    </p>
+
+    <p><em>Note:</em> Replace ACCESS_KEY, DAYS, and CODE with your actual access key, desired number of days, and license code respectively.</p>
 </body>
 </html>
