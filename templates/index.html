@@ -2,69 +2,40 @@
 <html>
 <head>
     <title>License Code Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            padding: 0 20px;
-        }
-        .title {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        #accessKeyInput {
-            font-size: 1.2em;
-            padding: 10px;
-            width: 300px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        #generateButton {
-            font-size: 1.2em;
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #008CBA; 
-            border: none;
-            color: white;
-            border-radius: 5px;
-        }
-        #generateButton:hover {
-            background-color: #007B9A;
-        }
+        /* Add your CSS here */
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="title">License Code Generator</div>
-        <input id="accessKeyInput" type="text" placeholder="Enter your access key">
-        <button id="generateButton">Generate License Code</button>
+        <h1 class="my-3">License Code Generator</h1>
+        <div id="generator">
+            <input class="form-control" type="text" id="accessKeyInput" placeholder="Enter your access key">
+            <button class="btn btn-primary mt-3" id="generateButton">Generate License Code</button>
+        </div>
+        <div id="doc" class="my-5">
+            <h3>Endpoints Documentation</h3>
+            <ul>
+                <li>
+                    <strong>To generate a new license code:</strong>
+                    <code>/?access_key=&lt;your_access_key&gt;&action=generate&days=&lt;days&gt;</code>
+                    <p>This will generate a new license code which is valid for the provided number of days. If <code>days</code> is not provided, it defaults to 30 days.</p>
+                </li>
+                <li>
+                    <strong>To validate a license code:</strong>
+                    <code>/?access_key=&lt;your_access_key&gt;&action=validate&code=&lt;code_to_validate&gt;</code>
+                    <p>This will validate the provided license code and return a message indicating whether the code is valid, already used, or expired.</p>
+                </li>
+                <li>
+                    <strong>To generate a new access key:</strong>
+                    <code>/generate_access_key</code>
+                    <p>This will generate a new access key that can be used to generate and validate license codes.</p>
+                </li>
+            </ul>
+        </div>
     </div>
-
-    <script>
-        document.getElementById('generateButton').onclick = function() {
-            var accessKey = document.getElementById('accessKeyInput').value;
-            var url = '/?access_key=' + accessKey + '&action=generate&days=30';
-            
-            fetch(url)
-                .then(response => {
-                    var contentType = response.headers.get("content-type");
-                    if (contentType && contentType.indexOf("application/json") !== -1) {
-                        return response.json().then(data => alert('License code: ' + data.license_code));
-                    } else {
-                        throw 'Invalid access key or server error';
-                    }
-                })
-                .catch(error => alert('Error: ' + error));
-        };
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
+
