@@ -1,9 +1,8 @@
-from flask import Flask, request, jsonify, render_template
-from pymongo import MongoClient
-from pymongo.errors import DuplicateKeyError
+from flask import Flask, request, render_template
+from pymongo import MongoClient, errors
+from random import choice
+from string import ascii_uppercase, digits
 from datetime import datetime, timedelta
-import random
-import string
 import os
 
 app = Flask(__name__)
