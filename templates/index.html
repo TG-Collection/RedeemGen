@@ -5,8 +5,8 @@
     <title>License Code Generator</title>
     <style>
         :root {
-            --primary-gradient: linear-gradient(to right, #E0C3FC, #FFCFDF);
-            --bg-color: #a19898;
+            --primary-gradient: linear-gradient(to right, #ff9966, #ff5e62);
+            --bg-color: #fafafa;
             --font-color: #333;
         }
 
@@ -95,7 +95,7 @@
             <h2>Generate a License Code</h2>
             <input class="url-input" id="license-code" type="text" value="https://licensegen.onrender.com/?access_key=ACCESS_KEY&action=generate&days=DAYS" readonly />
             <button onclick="copyToClipboard('license-code')">Copy</button>
-            <input class="url-input" type="text" placeholder="Enter your access key" />
+            <input class="url-input" id="accessKeyInput" type="text" placeholder="Enter your access key" />
             <button onclick="generateLicenseCode()">Generate</button>
             <p id="licenseCodeDisplay"></p>
             <p><strong>Method:</strong> GET</p>
@@ -141,5 +141,6 @@
 </body>
 
 </html>
+
 
 
