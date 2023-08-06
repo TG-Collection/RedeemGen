@@ -74,8 +74,6 @@ def handle_error(e):
         code = e.code
     return jsonify(error=str(e)), code
 
-app.register_blueprint(bp)
-
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
 
