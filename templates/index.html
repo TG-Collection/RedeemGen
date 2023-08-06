@@ -5,67 +5,79 @@
     <title>License Code Generator</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #EDEDED;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
         }
 
-        h1, h2, h3, p {
-            margin-bottom: 20px;
+        .header {
+            background-color: #35424a;
+            color: white;
+            padding: 15px;
+            text-align: center;
         }
 
         .container {
             max-width: 800px;
-            margin: auto;
+            margin: 0 auto;
             padding: 20px;
         }
 
-        .header {
-            text-align: center;
-            padding: 50px;
-            background-color: #35424a;
-            color: white;
-            font-size: 2em;
-            border-bottom: #e8491d 3px solid;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            border-radius: 5px;
+        .api-section {
             border: 1px solid #ccc;
-            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            background-color: #f5f5f5;
         }
 
-        button {
+        .url-input {
+            width: 90%;
+            cursor: pointer;
+        }
+
+        .copy-button {
+            width: 9%;
+            text-align: center;
+            margin-left: 1%;
+            border-radius: 5px;
             background-color: #35424a;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            margin-top: 10px;
+            padding: 10px 0;
             cursor: pointer;
             text-transform: uppercase;
         }
 
-        button:hover {
+        .copy-button:hover {
             background-color: #e8491d;
         }
 
-        .highlight {
-            color: #e8491d;
+        .generate-button {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #35424a;
+            color: white;
+            border: none;
+            padding: 10px 0;
+            cursor: pointer;
+            text-transform: uppercase;
         }
 
-        .api-section {
-            background-color: #F6F6F6;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        .generate-button:hover {
+            background-color: #e8491d;
         }
 
-        .api-section h3 {
-            color: #35424a;
+        @media only screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .api-section {
+                margin: 5px 0;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -76,42 +88,68 @@
     </div>
 
     <div class="container">
-        <h2>Generate a License Code</h2>
-        <input id="access-key-input" type="text" placeholder="Enter your access key here..." />
-        <button id="generate-button">Generate</button>
-
         <h2>API Documentation</h2>
-
         <div class="api-section">
             <h3>Generate an Access Key</h3>
-            <p><strong>URL:</strong> https://lisencecodegen.onrender.com/?action=generate_key</p>
+            <div>
+                <input class="url-input" type="text" value="https://lisencecodegen.onrender.com/?action=generate_key" readonly />
+                <button class="copy-button">Copy</button>
+            </div>
             <p><strong>Method:</strong> GET</p>
             <p><strong>Success Response:</strong> 200 OK, {"access_key": "generated_access_key"}</p>
         </div>
 
         <div class="api-section">
             <h3>Generate a License Code</h3>
-            <p><strong>URL:</strong> https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=generate&days=NUMBER_OF_DAYS</p>
+            <div>
+                <input id="accessKeyInput" class="url-input" type="text" placeholder="Enter your access key" />
+                <button class="generate-button" onclick="generateLicenseCode()">Generate</button>
+            </div>
+            <p id="licenseCodeDisplay"></p>
             <p><strong>Method:</strong> GET</p>
             <p><strong>Success Response:</strong> 200 OK, {"license_code": "generated_license_code"}</p>
         </div>
 
         <div class="api-section">
             <h3>Validate a License Code</h3>
-            <p><strong>URL:</strong> https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE</p>
+            <div>
+                <input class="url-input" type="text" value="https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE" readonly />
+                <button class="copy-button">Copy</button>
+            </div>
             <p><strong>Method:</strong> GET</p>
             <p><strong>Success Response:</strong> 200 OK, {"message": "Code validated successfully"}</p>
         </div>
     </div>
 
     <script>
-        const button = document.getElementById('generate-button');
-        const input = document.getElementById('access-key-input');
+        const copyButtons = document.querySelectorAll('.copy-button');
 
-        button.addEventListener('click', function() {
-            const accessKey = input.value;
-            window.location.href = `https://lisencecodegen.onrender.com/?access_key=${accessKey}&action=generate&days=30`;
+        copyButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const urlInput = this.previousElementSibling;
+                urlInput.select();
+                document.execCommand('copy');
+            });
         });
+
+        async function generateLicenseCode() {
+            const accessKeyInput = document.getElementById('accessKeyInput');
+            const licenseCodeDisplay = document.getElementById('licenseCodeDisplay');
+            const accessKey = accessKeyInput.value.trim();
+
+            if (accessKey === '') {
+                licenseCodeDisplay.textContent = 'Error: Please enter an access key.';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://lisencecodegen.onrender.com/?access_key=${accessKey}&action=generate&days=30`);
+                const data = await response.json();
+                licenseCodeDisplay.textContent = `License Code: ${data.license_code}`;
+            } catch (error) {
+                licenseCodeDisplay.textContent = 'Error: Invalid access key or server error.';
+            }
+        }
     </script>
 </body>
 
