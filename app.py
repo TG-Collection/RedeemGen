@@ -32,7 +32,7 @@ def landing_page():
 @bp.route('/')
 def home():
     if 'generate_key' in request.args:
-        time_in_days = int(request.args.get('validate'))
+        time_in_days = int(request.args.get('validate', 30))  # Set default validation period to 30 days
         expiration_date = datetime.now() + timedelta(days=time_in_days)
 
         try:
@@ -55,6 +55,9 @@ def home():
             return {"message": "Code validated successfully"}, 200
     else:
         return {"message": "Invalid request"}, 400
+
+
+
 
 # Add a handler for all uncaught exceptions
 @app.errorhandler(Exception)
