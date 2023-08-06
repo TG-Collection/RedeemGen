@@ -26,6 +26,9 @@ def generate_license_code():
 def home():
     action = request.args.get('action')
 
+    if action is None:
+        return render_template('index.html')
+
     if action == 'generate_key':
         generated_key = generate_license_code()
         try:
@@ -64,6 +67,7 @@ def home():
             return {"message": "Code validated successfully"}, 200
 
     return render_template('index.html')
+
             
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
