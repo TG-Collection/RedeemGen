@@ -76,5 +76,18 @@
             <input type="text" id="accessKeyInput" placeholder="Enter your access key">
             <button id="generateButton">Generate</button>
         </div>
+        
+        <script>
+            document.getElementById('generateButton').onclick = function() {
+                var accessKey = document.getElementById('accessKeyInput').value;
+                var url = '/?access_key=' + accessKey + '&action=generate&days=30';
+                
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => alert('License code: ' + data.license_code))
+                    .catch(error => alert('Error: ' + error));
+            };
+        </script>
     </body>
 </html>
+
