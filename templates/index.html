@@ -105,6 +105,10 @@
                 <input id="accessKeyInput" class="url-input" type="text" placeholder="Enter your access key" />
                 <button class="generate-button" onclick="generateLicenseCode()">Generate</button>
             </div>
+            <div>
+                <input class="url-input" type="text" value="https://lisencecodegen.onrender.com/?access_key=ACCESS_KEY&action=generate&days=DAYS" readonly />
+                <button class="copy-button">Copy</button>
+            </div>
             <p id="licenseCodeDisplay"></p>
             <p><strong>Method:</strong> GET</p>
             <p><strong>Success Response:</strong> 200 OK, {"license_code": "generated_license_code"}</p>
