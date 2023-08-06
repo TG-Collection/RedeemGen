@@ -26,10 +26,6 @@ def generate_license_code(size=10, chars=string.ascii_uppercase + string.digits)
     return ''.join(random.choice(chars) for _ in range(size))
 
 @app.route('/')
-def landing_page():
-    return render_template('index.html')
-
-@bp.route('/')
 def home():
     action = request.args.get('action')
     if action == 'generate':
