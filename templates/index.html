@@ -1,70 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <title>License Code Generator</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            background-color: #EDEDED;
+            margin: 0;
+            padding: 0;
+            color: #333;
         }
-        #generator {
+
+        h1, h2, h3, p {
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header {
             text-align: center;
-            margin-top: 15%;
-        }
-        #doc {
-            margin-top: 5%;
-        }
-        code {
-            color: #dc3545;
-        }
-        .btn {
-            background-color: #007bff;
-            border: none;
+            padding: 50px;
+            background-color: #35424a;
             color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            transition-duration: 0.4s;
-            cursor: pointer;
+            font-size: 2em;
+            border-bottom: #e8491d 3px solid;
         }
-        .btn:hover {
-            background-color: white; 
-            color: black; 
-            border: 2px solid #007bff;
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        button {
+            background-color: #35424a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background-color: #e8491d;
+        }
+
+        .highlight {
+            color: #e8491d;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1 class="my-3 text-center">License Code Generator</h1>
-        <div id="generator">
-            <input class="form-control" type="text" id="accessKeyInput" placeholder="Enter your access key">
-            <button class="btn btn-primary mt-3" id="generateButton">Generate License Code</button>
-        </div>
-        <div id="doc" class="my-5">
-            <h3>Endpoints Documentation</h3>
-            <ul>
-                <li>
-                    <strong>To generate a new license code:</strong>
-                    <code>/?access_key=&lt;your_access_key&gt;&action=generate&days=&lt;days&gt;</code>
-                    <p>This will generate a new license code which is valid for the provided number of days. If <code>days</code> is not provided, it defaults to 30 days.</p>
-                </li>
-                <li>
-                    <strong>To validate a license code:</strong>
-                    <code>/?access_key=&lt;your_access_key&gt;&action=validate&code=&lt;code_to_validate&gt;</code>
-                    <p>This will validate the provided license code and return a message indicating whether the code is valid, already used, or expired.</p>
-                </li>
-                <li>
-                    <strong>To generate a new access key:</strong>
-                    <code>/generate_access_key</code>
-                    <p>This will generate a new access key that can be used to generate and validate license codes.</p>
-                </li>
-            </ul>
-        </div>
+    <div class="header">
+        <h1>License Code Generator</h1>
     </div>
-    <script src="script.js"></script>
+
+    <div class="container">
+        <h2>Generate a License Code</h2>
+        <input id="access-key-input" type="text" placeholder="Enter your access key here..." />
+        <button id="generate-button">Generate</button>
+
+        <h2>API Documentation</h2>
+        <h3>Generate an Access Key</h3>
+        <p><strong>URL</strong>: https://lisencecodegen.onrender.com/?action=generate_key</p>
+        <p><strong>Method</strong>: GET</p>
+        <p><strong>Success Response</strong>: 200 OK, {"access_key": "generated_access_key"}</p>
+
+        <h3>Generate a License Code</h3>
+        <p><strong>URL</strong>: https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=generate&days=NUMBER_OF_DAYS</p>
+        <p><strong>Method</strong>: GET</p>
+        <p><strong>Success Response</strong>: 200 OK, {"license_code": "generated_license_code"}</p>
+
+        <h3>Validate a License Code</h3>
+        <p><strong>URL</strong>: https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE</p>
+        <p><strong>Method</strong>: GET</p>
+        <p><strong>Success Response</strong>: 200 OK, {"message": "Code validated successfully"}</p>
+    </div>
+
+    <script>
+        const button = document.getElementById('generate-button');
+        const input = document.getElementById('access-key-input');
+
+        button.addEventListener('click', function() {
+            const accessKey = input.value;
+            window.location.href = `https://lisencecodegen.onrender.com/?access_key=${accessKey}&action=generate&days=30`;
+        });
+    </script>
 </body>
+
 </html>
 
