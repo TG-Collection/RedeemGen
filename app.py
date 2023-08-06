@@ -33,12 +33,12 @@ def generate():
         except DuplicateKeyError:
             continue
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def landing_page():
     return render_template('index.html')
 
-@app.route('/', methods=['GET'])
-def home():
+@app.route('/license', methods=['GET'])
+def license_operations():
     access_key = request.args.get('access_key')
     operation = request.args.get('action')
     validate = request.args.get('days', default=30)
@@ -69,6 +69,6 @@ def home():
         else:
             codes.update_one({"_id": code}, {"$set": {"used": True}})
             return {"message": "Code validated successfully"}, 200
-
+            
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
