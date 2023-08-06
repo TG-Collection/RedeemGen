@@ -78,15 +78,21 @@
         </div>
         
         <script>
-            document.getElementById('generateButton').onclick = function() {
-                var accessKey = document.getElementById('accessKeyInput').value;
-                var url = '/?access_key=' + accessKey + '&action=generate&days=30';
-                
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => alert('License code: ' + data.license_code))
-                    .catch(error => alert('Error: ' + error));
-            };
+    document.getElementById('generateButton').onclick = function() {
+        var accessKey = document.getElementById('accessKeyInput').value;
+        var url = '/?access_key=' + accessKey + '&action=generate&days=30';
+        
+        fetch(url)
+            .then(response => {
+                var contentType = response.headers.get("content-type");
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    return response.json().then(data => alert('License code: ' + data.license_code));
+                } else {
+                    throw 'Invalid access key or server error';
+                }
+            })
+            .catch(error => alert('Error: ' + error));
+    };
         </script>
     </body>
 </html>
