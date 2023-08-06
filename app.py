@@ -31,7 +31,8 @@ def landing_page():
 
 @bp.route('/')
 def home():
-    if 'generate_key' in request.args:
+    operation = request.args.get('operation')
+    if operation == 'generate_key':
         time_in_days = int(request.args.get('validate', 30))  # Set default validation period to 30 days
         expiration_date = datetime.now() + timedelta(days=time_in_days)
 
@@ -41,8 +42,8 @@ def home():
             return {"license_code": license_code}, 200
         except DuplicateKeyError:
             return home()
-    elif 'validate' in request.args:
-        code = request.args.get('validate')
+    elif operation == 'validate':
+        code = request.args.get('code')
         entry = codes.find_one({"_id": code})
         if entry is None:
             return {"message": "Invalid code"}, 404
@@ -54,7 +55,8 @@ def home():
             codes.update_one({"_id": code}, {"$set": {"used": True}})
             return {"message": "Code validated successfully"}, 200
     else:
-        return {"message": "Invalid request"}, 400
+        return render_template('index.html')
+
 
 
 
