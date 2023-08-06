@@ -22,8 +22,6 @@ client = MongoClient(MONGODB_URL)
 db = client["license_db"]
 codes = db["codes"]
 
-codes.create_index("_id", unique=True)
-
 def generate_license_code(size=10, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
