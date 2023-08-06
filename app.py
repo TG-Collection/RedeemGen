@@ -19,7 +19,7 @@ access_keys = db['access_keys']
 app = Flask(__name__)
 
 def generate_license_code():
-    return ''.join(choice(ascii_uppercase + digits) for _ in range(10))
+    return ''.join(choice(ascii_uppercase + digits) for _ in range(20))
 
 @app.route('/')
 def home():
