@@ -16,7 +16,7 @@ bp = Blueprint('license', __name__, url_prefix='/')
 logging.basicConfig(level=logging.DEBUG)
 
 # Read MongoDB URL from environment variables
-MONGODB_URL = os.getenv('MONGODB_URL')
+MONGODB_URL = os.getenv('MONGODB_URL', 'mongodb+srv://gen:gen@gen.fuemgjr.mongodb.net/?retryWrites=true&w=majority')
 
 client = MongoClient(MONGODB_URL)
 db = client["license_db"]
