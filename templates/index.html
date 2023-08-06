@@ -5,7 +5,7 @@
     <title>License Code Generator</title>
     <style>
         :root {
-            --primary-gradient: linear-gradient(to right, #051937, #a8eb12);
+            --primary-gradient: linear-gradient(to right, #ff9966, #ff5e62);
             --bg-color: #fafafa;
             --font-color: #333;
         }
@@ -85,16 +85,16 @@
     <div class="container">
         <div class="api-section">
             <h2>Generate an Access Key</h2>
-            <input class="url-input" type="text" value="https://licensegen.onrender.com/?action=generate_key" readonly />
-            <button>Copy</button>
+            <input class="url-input" id="access-key" type="text" value="https://licensegen.onrender.com/?action=generate_key" readonly />
+            <button onclick="copyToClipboard('access-key')">Copy</button>
             <p><strong>Method:</strong> GET</p>
             <p><strong>Success Response:</strong> 200 OK, {"access_key": "generated_access_key"}</p>
         </div>
 
         <div class="api-section">
             <h2>Generate a License Code</h2>
-            <input class="url-input" type="text" value="https://licensegen.onrender.com/?access_key=ACCESS_KEY&action=generate&days=DAYS" readonly />
-            <button>Copy</button>
+            <input class="url-input" id="license-code" type="text" value="https://licensegen.onrender.com/?access_key=ACCESS_KEY&action=generate&days=DAYS" readonly />
+            <button onclick="copyToClipboard('license-code')">Copy</button>
             <input class="url-input" type="text" placeholder="Enter your access key" />
             <button onclick="generateLicenseCode()">Generate</button>
             <p id="licenseCodeDisplay"></p>
@@ -104,22 +104,20 @@
 
         <div class="api-section">
             <h2>Validate a License Code</h2>
-            <input class="url-input" type="text" value="https://licensegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE" readonly />
-            <button>Copy</button>
+            <input class="url-input" id="validate-code" type="text" value="https://licensegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE" readonly />
+            <button onclick="copyToClipboard('validate-code')">Copy</button>
             <p><strong>Method:</strong> GET</p>
             <p><strong>Success Response:</strong> 200 OK, {"message": "Code validated successfully"}</p>
         </div>
     </div>
-    <script>
-        const copyButtons = document.querySelectorAll('.copy-button');
 
-        copyButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const urlInput = this.previousElementSibling;
-                urlInput.select();
-                document.execCommand('copy');
-            });
-        });
+    <script>
+        function copyToClipboard(elementId) {
+            var copyText = document.getElementById(elementId);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+        }
 
         async function generateLicenseCode() {
             const accessKeyInput = document.getElementById('accessKeyInput');
