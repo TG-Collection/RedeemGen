@@ -56,6 +56,17 @@
         .highlight {
             color: #e8491d;
         }
+
+        .api-section {
+            background-color: #F6F6F6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .api-section h3 {
+            color: #35424a;
+        }
     </style>
 </head>
 
@@ -70,20 +81,27 @@
         <button id="generate-button">Generate</button>
 
         <h2>API Documentation</h2>
-        <h3>Generate an Access Key</h3>
-        <p><strong>URL</strong>: https://lisencecodegen.onrender.com/?action=generate_key</p>
-        <p><strong>Method</strong>: GET</p>
-        <p><strong>Success Response</strong>: 200 OK, {"access_key": "generated_access_key"}</p>
 
-        <h3>Generate a License Code</h3>
-        <p><strong>URL</strong>: https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=generate&days=NUMBER_OF_DAYS</p>
-        <p><strong>Method</strong>: GET</p>
-        <p><strong>Success Response</strong>: 200 OK, {"license_code": "generated_license_code"}</p>
+        <div class="api-section">
+            <h3>Generate an Access Key</h3>
+            <p><strong>URL:</strong> https://lisencecodegen.onrender.com/?action=generate_key</p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Success Response:</strong> 200 OK, {"access_key": "generated_access_key"}</p>
+        </div>
 
-        <h3>Validate a License Code</h3>
-        <p><strong>URL</strong>: https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE</p>
-        <p><strong>Method</strong>: GET</p>
-        <p><strong>Success Response</strong>: 200 OK, {"message": "Code validated successfully"}</p>
+        <div class="api-section">
+            <h3>Generate a License Code</h3>
+            <p><strong>URL:</strong> https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=generate&days=NUMBER_OF_DAYS</p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Success Response:</strong> 200 OK, {"license_code": "generated_license_code"}</p>
+        </div>
+
+        <div class="api-section">
+            <h3>Validate a License Code</h3>
+            <p><strong>URL:</strong> https://lisencecodegen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE</p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Success Response:</strong> 200 OK, {"message": "Code validated successfully"}</p>
+        </div>
     </div>
 
     <script>
@@ -98,4 +116,5 @@
 </body>
 
 </html>
+
 
