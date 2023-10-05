@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 # Read MongoDB URL from environment variables
-MONGODB_URL = os.getenv('MONGODB_URL', 'mongodb+srv://gen:gen@gen.fuemgjr.mongodb.net/?retryWrites=true&w=majority')
+MONGODB_URL = os.getenv('MONGODB_URL')
 
 client = MongoClient(MONGODB_URL)
 db = client['license_db']
