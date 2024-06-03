@@ -85,7 +85,7 @@
     <div class="container">
         <div class="api-section">
             <h2>Generate an Access Key</h2>
-            <input class="url-input" id="access-key" type="text" value="https://redeemgen.onrender.com/?action=generate_key" readonly />
+            <input class="url-input" id="access-key" type="text" value="https://redeemcodes.onrender.com/?action=generate_key" readonly />
             <button onclick="copyToClipboard('access-key')">Copy</button>
             <p><strong>Method:</strong> GET</p>
             <p><strong>Success Response:</strong> 200 OK, {"access_key": "generated_access_key"}</p>
@@ -93,7 +93,7 @@
 
         <div class="api-section">
             <h2>Generate a License Code</h2>
-            <input class="url-input" id="license-code" type="text" value="https://redeemgen.onrender.com/?access_key=ACCESS_KEY&action=generate&days=DAYS" readonly />
+            <input class="url-input" id="license-code" type="text" value="https://redeemcodes.onrender.com/?access_key=ACCESS_KEY&action=generate&days=DAYS" readonly />
             <button onclick="copyToClipboard('license-code')">Copy</button>
             <input class="url-input" id="accessKeyInput" type="text" placeholder="Enter your access key" />
             <button onclick="generateLicenseCode()">Generate</button>
@@ -104,7 +104,7 @@
 
         <div class="api-section">
             <h2>Validate a License Code</h2>
-            <input class="url-input" id="validate-code" type="text" value="https://redeemgen.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE" readonly />
+            <input class="url-input" id="validate-code" type="text" value="https://redeemcodes.onrender.com/?access_key=YOUR_ACCESS_KEY&action=validate&code=LICENSE_CODE" readonly />
             <button onclick="copyToClipboard('validate-code')">Copy</button>
             <p><strong>Method:</strong> GET</p>
             <p><strong>Success Response:</strong> 200 OK, {"message": "Code validated successfully"}</p>
@@ -130,7 +130,7 @@
             }
 
             try {
-                const response = await fetch(`https://redeemgen.onrender.com/?access_key=${accessKey}&action=generate&days=30`);
+                const response = await fetch(`https://redeemcodes.onrender.com/?access_key=${accessKey}&action=generate&days=30`);
                 const data = await response.json();
                 licenseCodeDisplay.textContent = `License Code: ${data.license_code}`;
             } catch (error) {
